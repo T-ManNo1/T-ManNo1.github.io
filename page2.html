@@ -1,1 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>許廷安HW1</title>
+<style>
+body {background-color: pink;}  /*原本顏色是Violet*/
+p   {color: red;}
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%; /* 讓表格佔滿整個畫面 */
+}
+
+td, th {
+  border: 3px solid rgb(205, 226, 19);
+  text-align: center;
+  padding: 10px; /* 稍微增加內邊距讓內容更好看 */
+}
+
+tr:nth-child(even) {
+  background-color: #ecbef1;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+}
+
+td {
+  cursor: pointer; /* 讓鼠標變成可點擊狀態 */
+  transition: background-color 0.3s ease, transform 0.1s ease; /* 添加動畫效果 */
+}
+
+td:hover {
+  background-color: rgba(255, 255, 0, 0.4); /* 變亮（黃色半透明） */
+  transform: scale(1.05); /* 稍微放大 */
+}
+
+.heart {
+  display: inline-block;
+  animation: heartbeat 1s infinite alternate;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.3); } /* 愛心跳動效果 */
+}
+
+
+.submit-container {
+  text-align: right; /* 讓內容靠右對齊 */
+  margin-top: 10px;  /* 增加上方間距 */
+}
+
+.submit-container input[type="submit"] {
+  padding: 5px 10px;
+  background-color: #f5f9f6; 
+  color: rgb(5, 5, 5);
+  border: none;
+  cursor: pointer;
+  font-size: 8px;
+}
+
+.submit-container input[type="submit"]:hover {
+  background-color: #f8faf8; 
+}
+
+.custom-tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  display: none;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  max-width: 180px;
+  text-align: center;
+}
+
+.custom-tooltip img {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<h1 style="font-size:50px; text-align: center;">
+  王柏允開的西式可愛小餐館のMenu <span class="heart">❤️</span><span class="heart">❤️</span>
+</h1>
+
+
+
+<script>
+    function selectDish(category, code) {
+      document.getElementById(category).value = code;
+    }
+  
+    window.onload = function () {
+      const tableCells = document.querySelectorAll("td");
+      const tooltip = document.getElementById("tooltip");
+  
+      tableCells.forEach((cell) => {
+        cell.style.cursor = "pointer";
+  
+        cell.onmousemove = function (e) {
+          const text = cell.innerHTML;
+          const match = text.match(/\((.)\)<br>(.+?)\(/) || text.match(/\((.)\)<br>(.+)/);
+          if (match) {
+            const code = match[1];
+            const dishName = match[2].trim();
+            const categoryRaw = cell.closest("table").rows[0].cells[cell.cellIndex].textContent.trim();
+            const categoryMap = {
+              "Appetizer(前菜)": "Appetizer",
+              "Salad(沙拉)": "Salad",
+              "Soup(湯)": "Soup",
+              "Nonstaple Food(副食)": "Nonstaple Food",
+              "Staple Food(主食)": "Staple Food",
+              "Dessert(甜點)": "Dessert",
+              "Beverage(飲品)": "Beverage",
+            };
+  
+            const category = categoryMap[categoryRaw];
+            if (category) {
+              // 顯示 tooltip
+              const imgSrc = `images/${category}_${code}.jpg`;
+              tooltip.innerHTML = `
+                <img src="${imgSrc}" alt="${dishName}">
+                <span>${dishName}</span>
+              `;
+              tooltip.style.display = "block";
+              tooltip.style.left = e.pageX + 15 + "px";
+              tooltip.style.top = e.pageY + 15 + "px";
+            }
+          }
+        };
+  
+        cell.onmouseleave = function () {
+          tooltip.style.display = "none";
+        };
+  
+        cell.onclick = function () {
+          const text = cell.innerHTML;
+          const match = text.match(/\((.)\)<br>(.+?)\(/) || text.match(/\((.)\)<br>(.+)/);
+          if (match) {
+            const code = match[1];
+            const categoryRaw = cell.closest("table").rows[0].cells[cell.cellIndex].textContent.trim();
+            const categoryMap = {
+              "Appetizer(前菜)": "Appetizer",
+              "Salad(沙拉)": "Salad",
+              "Soup(湯)": "Soup",
+              "Nonstaple Food(副食)": "Nonstaple Food",
+              "Staple Food(主食)": "Staple Food",
+              "Dessert(甜點)": "Dessert",
+              "Beverage(飲品)": "Beverage",
+            };
+  
+            if (categoryMap[categoryRaw]) {
+              selectDish(categoryMap[categoryRaw], code);
+            }
+          }
+        };
+      });
+    };
+  </script>
+  
+
+
+<table>
+  <tr>
+    <th>Appetizer(前菜)</th>
+    <th>Salad(沙拉)</th>
+    <th>Soup(湯)</th>
+    <th>Nonstaple Food(副食)</th>
+    <th>Staple Food(主食)</th>
+    <th>Dessert(甜點)</th>
+    <th>Beverage(飲品)</th>
+  </tr>
+  <tr>
+    <td>(A)<br>Truffle Butter Baguette(松露奶油麵包)</td>
+    <td>(A)<br>Smokeed Chicken Chopped Salad(燻雞鮮蔬沙拉)</td>
+    <td>(A)<br>Authentic Borscht Soup(正宗羅宋湯)</td>
+    <td>(A)<br>Crispy Fried Fish with Tartar Sauce(香酥魚排佐塔塔醬)</td>
+    <td>(A)<br>Herbes de Provence Roasted Chicken(普羅旺斯烤雞腿)</td>
+    <td>(A)<br>Fig Custard Tart(新鮮無花果卡士達蛋塔)</td>
+    <td>(A)<br>The Flavor of Heartache(心痛的滋味)</td>
+  </tr>
+  <tr>
+    <td>(B)<br>Moules Frites(牡蠣薯條)</td>
+    <td>(B)<br>Warmed German Potato Salad(德式熱馬鈴薯沙拉)</td>
+    <td>(B)<br>Roasted Pumpkin Soup with Bacon(經典培根南瓜濃湯)</td>
+    <td>(B)<br>Greenland Halibut with Lemon Butter(香煎格陵蘭深海比目魚佐檸檬牛油汁)</td>
+    <td>(B)<br>Hungarian Beef Goulash(匈牙利燉牛肉)</td>
+    <td>(B)<br>Vanillekipferl(香草新月餅乾)</td>
+    <td>(B)<br>Bourbon Whiskey(波本威士忌)</td>
+  </tr>
+  <tr>
+    <td>(C)<br>Brussel Sprouts(義式烤孢子甘藍)</td>
+    <td>(C)<br>Salad with Honey Mustard Sauce(蜂蜜芥末沙拉)</td>
+    <td>(C)<br>French Onion Soup(法式洋蔥湯)</td>
+    <td>(C)<br>surströmming(瑞典鹽醃鯡魚罐頭)</td>
+    <td>(C)<br>Spaghetti Alla Puttanesca(娼婦風味義大利麵)</td>
+    <td>(C)<br>Marble Cheese Cake(大理石乳酪蛋糕)</td>
+    <td>(C)<br>Vodka+Whiskey(烏龍茶)</td>
+  </tr>
+  
+   <tr>
+    <td>(D)<br>Moules Vin Blanc(比利時白酒燴淡菜)</td>
+    <td>(D)<br>Watermelon Salad with Whipped Feta(地中海西瓜沙拉)</td>
+    <td>(D)<br>Bounce Turtle Soup(彈跳甲魚湯)</td>
+    <td>(D)<br>Calamares Ala Andaluza(安達盧西亞式香炸魷魚)</td>
+    <td>(D)<br>Paella(西班牙海鮮燉飯)</td>
+    <td>(D)<br>Strawberry Ice Cream(草莓冰淇淋)</td>
+    <td>(D)<br>Wiener Kaffee(維也納咖啡)</td>
+  </tr>
+  
+  <tr>
+    <td>(E)<br>Mozzarella and Tomatos(莫札瑞拉起司番茄)</td>
+    <td>(E)<br>French Sautéed Mixed Vegetables(法式什錦炒時蔬)</td>
+    <td>(E)<br>Bouillabaisse(馬賽魚湯)</td>
+    <td>(E)<br>Ploughmans lunch(英式農夫三明治)<br></td>
+    <td>(E)<br>Schweinshaxe(德國豬腳)</td>
+    <td>(E)<br>Crème brûlée(法式烤布蕾)</td>
+    <td>(E)<br>Crodo Lemon Soda Mojito(克羅多莫西托風味氣泡飲)<br></td>
+  </tr>
+  
+  <tr>
+    <td>(F)<br>Bruschetta(普切塔)</td>
+    <td>(F)<br>Taiwanese kimchi(台式泡菜)</td>
+    <td>(F)<br>Ajoblanco(西班牙白冷湯)</td>
+    <td>(F)<br>Gambas Al Ajillo(橄欖油蒜味蝦)<br></td>
+    <td>(F)<br>Intestine vermicelli(大腸麵線)</td>
+    <td>(F)<br>Classical Brownie(古典歐式布朗尼)</td>
+    <td>(F)<br>Fruit Tea(水果茶)<br></td>
+  </tr>
+</table><br><br>
+
+
+
+  <form action="/action_page.php">
+    <label for="Appetizer"><label style="color:blue;">Appetizer:</label><br>
+    <input type="text" id="Appetizer" name="Appetizer"><br>
+    
+    <label for="Salad"><label style="color:blue;">Salad:</label><br>
+    <input type="text" id="Salad" name="Salad"><br>
+    
+    <label for="Soup"><label style="color:blue;">Soup:</label><br>
+    <input type="text" id="Soup" name="Soup"><br>
+    
+    <label for="Nonstaple Food"><label style="color:blue;">Nonstaple Food:</label><br>
+    <input type="text" id="Nonstaple Food" name="Nonstaple Food"><br>
+    
+    <label for="Staple Food"><label style="color:blue;">Staple Food:</label><br>
+    <input type="text" id="Staple Food" name="Staple Food"><br>
+    
+    <label for="Dessert"><label style="color:blue;">Dessert:</label><br>
+    <input type="text" id="Dessert" name="Dessert"><br>
+    
+    <label for="Beverage"><label style="color:blue;">Beverage:</label><br>
+    <input type="text" id="Beverage" name="Beverage"><br><br>
+    
+    <div class="submit-container">
+      <input type="submit" value="Submit(real)">
+    </div>
+  </form> 
+</div> 
+
+<form action="/action_page.php"></form>
+  <input type="submit" value="Submit">
+</form>
+
+<p>(1)Please click the grid of each kind of dish.<br>
+(2)Click the "Submit" button,then the form-data will be sent to kitchen. We will prepare for your dish.</p>
+
+<div id="tooltip" class="custom-tooltip"></div>
+
+</body>
+</html>
