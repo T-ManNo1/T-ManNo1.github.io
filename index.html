@@ -1,137 +1,206 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-<title>許廷安HW1</title>
-<style>
-body {background-color: Violet;}
-p   {color: red;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前情提要</title>
+    <style>
+        /* Reset 與全域設定 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 160%;      /*記得段落被砍掉就把這裡調高!!!!!!*/
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            background: radial-gradient(circle at bottom, #1a003d, #13013c);
+            overflow-x: hidden;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        /* 容器 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            margin: 0 20px; /* 移除上下空白，只保留左右 */
+        }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 70%;
-}
+        /* 標題與段落樣式 */
+        h1 {
+            color: #fff;
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        p {
+            color: #fff;
+            font-size: 24px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
 
-td, th {
-  border:3px solid rgb(205, 226, 19);
-  text-align: left;
-  padding: 6px;
-}
+        /* 極光背景 */
+        .aurora,
+        .aurora2,
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
 
-tr:nth-child(even) {
-  background-color: #ecbef1;
-}
+        .aurora {
+            top: 20%;
+            background: linear-gradient(
+                120deg,
+                rgba(178, 102, 255, 0.4),
+                rgba(102, 178, 255, 0.4),
+                rgba(102, 255, 204, 0.4)
+            );
+            background-size: 200% 200%;
+            animation: auroraWave 8s ease-in-out infinite;
+            filter: blur(40px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
 
-tr:nth-child(odd) {
-  background-color: white;
-}
-</style>
+        .aurora2 {
+            width: 50%;
+            top: 10%;
+            background: linear-gradient(
+                200deg,
+                rgba(102, 255, 204, 0.25),
+                rgba(102, 178, 255, 0.25),
+                rgba(178, 102, 255, 0.25)
+            );
+            background-size: 200% 200%;
+            animation: auroraWave2 12s ease-in-out infinite;
+            filter: blur(50px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        @keyframes auroraWave {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 0% 50%;
+            }
+            50% {
+                transform: translateX(-10%) translateY(10%) rotate(5deg) scale(1.1) skew(5deg, -5deg);
+                background-position: 100% 50%;
+            }
+            100% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes auroraWave2 {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 100% 50%;
+            }
+            50% {
+                transform: translateX(15%) translateY(-10%) rotate(-5deg) scale(1.2) skew(-8deg, 4deg);
+                background-position: 0% 50%;
+            }
+            100% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 100% 50%;
+            }
+        }
+
+        /* 星星動畫 */
+        .stars {
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgb(255, 255, 255);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0.8;
+            animation: twinkle 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+        }
+
+        /* 按鈕 */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+    </style>
 </head>
-
 <body>
-<h1 style="font-size:50px;">王柏允開的西式可愛小餐館のManu</h1>
+    <div class="aurora"></div>
+    <div class="aurora2"></div>
+    <div class="stars"></div>
 
+    <div class="container">
+        <h1>~一段創始人的小故事~</h1>
+        <p>餐廳創始人，王柏允，一位對料理懷抱熱情、對生活充滿美感的美食家。</p>
+        <p>他從小就對烹飪產生濃厚的興趣，在課業之外的閒暇時間常常看著網路食譜做簡單的料理。隨著下廚的經驗累積，他漸漸擁有了自己的一套菜單秘方，其滋味獲得家人的讚賞，就在這一霎那，他找到了自己的人生目標──就是開一家屬於自己的餐廳。</p>    
+        <p>為了這個夢想，國高中時便厚著臉皮地向住家附近的餐廳大廚請教料理祕訣，大學時更是不畏語言的隔閡以及地理上的障礙，遠赴歐洲交換留學，為的就是能夠親自體驗、品嘗、學習道地的味道及手藝。</p>
+        <p>然而深造的過程並非順風順水。在第一間餐廳打工時，他完全無法掌握正統的西式料理烹調方式，因此很快就被辭退了。但他沒有灰心，繼續尋找下一間餐廳工作，第二間、第三間、第四間……，不知道被辭退多少次，他始終沒辦法掌握要領，甚至曾經被轉到洗碗盤的崗位，儘管沮喪，他依舊沒有放棄認真學習，在洗盤子時他還會跑去廚房偷喵廚師們的料理過程，還會觀察端出去的菜色帶給客人們的表情，筆記本一本接著一本詳細記錄了所見所聞。雖然歷經了重重困難，憑藉著他不屈不撓的決心以及用心地觀察，終於釐清了道地西式料理手法跟在台西式料理微妙差異。</p>
+        <p>從這趟收穫滿滿的留歐之旅，將對歐洲經典風味的深刻理解，融合現代料理技巧帶回台灣，結合氣派、古典的餐廳氛圍，並堅持選用當季食材、注重每一道菜的靈魂與細節，希望讓每位客人都能在這裡，品嚐到一份來自歐洲的溫度與記憶。</p>
+        <p>"真正打動人心的料理，不只是味道，更是一段故事"—— 王柏允</p>
 
-<table>
-  <tr>
-    <th>Appetizer(前菜)</th>
-    <th>Salad(沙拉)</th>
-    <th>Soup(湯)</th>
-    <th>Nonstaple Food(副食)</th>
-    <th>Staple Food(主食)</th>
-    <th>Dessert(甜點)</th>
-    <th>Beverage(飲品)</th>
-  </tr>
-  <tr>
-    <td>(A)<br>Truffle Butter Baguette(松露奶油麵包)</td>
-    <td>(A)<br>Smokeed Chicken Chopped Salad(燻雞鮮蔬沙拉)</td>
-    <td>(A)<br>Authentic Borscht Soup(正宗羅宋湯)</td>
-    <td>(A)<br>Crispy Fried Fish with Tartar Sauce(香酥魚排佐塔塔醬)</td>
-    <td>(A)<br>Herbes de Provence Roasted Chicken(普羅旺斯烤雞腿)</td>
-    <td>(A)<br>Fig Custard Tart(新鮮無花果卡士達蛋塔)</td>
-    <td>(A)<br>The Flavor of Heartache(心痛的滋味)</td>
-  </tr>
-  <tr>
-    <td>(B)<br>Moules Frites(牡蠣薯條)</td>
-    <td>(B)<br>Warmed German Potato Salad(德式熱馬鈴薯沙拉)</td>
-    <td>(B)<br>Roasted Pumpkin Soup with Bacon(經典培根南瓜濃湯)</td>
-    <td>(B)<br>Greenland Halibut with Lemon Butter(香煎格陵蘭深海比目魚佐檸檬牛油汁)</td>
-    <td>(B)<br>Hungarian Beef Goulash(匈牙利燉牛肉)</td>
-    <td>(B)<br>Vanillekipferl(香草新月餅乾)</td>
-    <td>(B)<br>Bourbon Whiskey(波本威士忌)</td>
-  </tr>
-  <tr>
-    <td>(C)<br>Brussel Sprouts(義式烤孢子甘藍)</td>
-    <td>(C)<br>Salad with Honey Mustard Sauce(蜂蜜芥末沙拉)</td>
-    <td>(C)<br>French Onion Soup(法式洋蔥湯)</td>
-    <td>(C)<br>surströmming(瑞典鹽醃鯡魚罐頭)</td>
-    <td>(C)<br>Spaghetti Alla Puttanesca(娼婦風味義大利麵)</td>
-    <td>(C)<br>Marble Cheese Cake(大理石乳酪蛋糕)</td>
-    <td>(C)<br>Vodka+Whiskey(烏龍茶)</td>
-  </tr>
-  
-   <tr>
-    <td>(D)<br>Moules Vin Blanc(比利時白酒燴淡菜)</td>
-    <td>(D)<br>Watermelon Salad with Whipped Feta(地中海西瓜沙拉)</td>
-    <td>(D)<br>Bounce Turtle Soup(彈跳甲魚湯)</td>
-    <td>(D)<br>Calamares Ala Andaluza(安達盧西亞式香炸魷魚)</td>
-    <td>(D)<br>Paella(西班牙海鮮燉飯)</td>
-    <td>(D)<br>Strawberry Ice Cream(草莓冰淇淋)</td>
-    <td>(D)<br>Wiener Kaffee(維也納咖啡)</td>
-  </tr>
-  
-  <tr>
-    <td>(E)<br>Mozzarella and Tomatos(莫札瑞拉起司番茄)</td>
-    <td>(E)<br>French Sautéed Mixed Vegetables(法式什錦炒時蔬)</td>
-    <td>(E)<br>Bouillabaisse(馬賽魚湯)</td>
-    <td>(E)<br>Ploughmans lunch(英式農夫三明治)<br></td>
-    <td>(E)<br>Schweinshaxe(德國豬腳)</td>
-    <td>(E)<br>Crème brûlée(法式烤布蕾)</td>
-    <td>(E)<br>Crodo Lemon Soda Mojito(克羅多莫西托風味氣泡飲)<br></td>
-  </tr>
-  
-  <tr>
-    <td>(F)<br>Bruschetta(普切塔)</td>
-    <td>(F)<br>Taiwanese kimchi(台式泡菜)</td>
-    <td>(F)<br>Ajoblanco(西班牙白冷湯)</td>
-    <td>(F)<br>Gambas Al Ajillo(橄欖油蒜味蝦)<br></td>
-    <td>(F)<br>Intestine vermicelli(大腸麵線)</td>
-    <td>(F)<br>Classical Brownie(古典歐式布朗尼)</td>
-    <td>(F)<br>Fruit Tea(水果茶)<br></td>
-  </tr>
-</table><br><br>
+        <a href="http://127.0.0.1:5500/1.html">
+            <button>To be Continued</button>
+        </a>
+    </div>
 
-
-
-<form action="/action_page.php">
-  <label for="Appetizer"><label style="color:blue;">Appetizer:</label><br>
-  <input type="text" id="Appetizer" name="Appetizer"><br>
-  
-  <label for="Salad"><label style="color:blue;">Salad:</label><br>
-  <input type="text" id="Salad" name="Salad"><br>
-  
-  <label for="Soup"><label style="color:blue;">Soup:</label><br>
-  <input type="text" id="Soup" name="Soup"><br>
-  
-  <label for="Nonstaple Food"><label style="color:blue;">Nonstaple Food:</label><br>
-  <input type="text" id="Nonstaple Food" name="Nonstaple Food"><br>
-  
-  <label for="Staple Food"><label style="color:blue;">Staple Food:</label><br>
-  <input type="text" id="Staple Food" name="Staple Food"><br>
-  
-  <label for="Dessert"><label style="color:blue;">Dessert:</label><br>
-  <input type="text" id="Dessert" name="Dessert"><br>
-  
-  <label for="Beverage"><label style="color:blue;">Beverage:</label><br>
-  <input type="text" id="Beverage" name="Beverage"><br><br>
-  
-  <input type="submit" value="Submit">
-</form> 
-
-<p>(1)Please fill the code(A,B,C,D,E,F) of each kind of dish.<br>
-(2)Click the "Submit" button,then the form-data will be sent to kitchen. We will prepare for your dish.</p>
-
+    <script>
+        // 星星動畫
+        const starContainer = document.querySelector('.stars');
+        function createStar() {
+            let star = document.createElement('div');
+            star.classList.add('star');
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starContainer.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+                createStar();
+            }, Math.random() * 5000 + 3000);
+        }
+        for (let i = 0; i < 50; i++) {
+            createStar();
+        }
+    </script>
 </body>
 </html>
 
