@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前情提要</title>
+    <style>
+        /* Reset 與全域設定 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 165%; /* 記得段落被砍掉就把這裡調高 */
+            overflow-y: auto; /* 允許頁面垂直滾動 */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            background: radial-gradient(circle at bottom, #1a003d, #13013c);
+            overflow-x: hidden;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 容器 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            margin: 0 20px; /* 移除上下空白，只保留左右 */
+            /* 移除邊框 */
+            border: none;
+        }
+
+        /* 標題與段落樣式 */
+        h1 {
+            color: #fff;
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        p {
+            color: #fff;
+            font-size: 24px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        /* 極光背景 */
+        .aurora,
+        .aurora2,
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .aurora {
+            top: 20%;
+            background: linear-gradient(
+                120deg,
+                rgba(178, 102, 255, 0.4),
+                rgba(102, 178, 255, 0.4),
+                rgba(102, 255, 204, 0.4)
+            );
+            background-size: 200% 200%;
+            animation: auroraWave 8s ease-in-out infinite;
+            filter: blur(40px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .aurora2 {
+            width: 50%;
+            top: 10%;
+            background: linear-gradient(
+                200deg,
+                rgba(102, 255, 204, 0.25),
+                rgba(102, 178, 255, 0.25),
+                rgba(178, 102, 255, 0.25)
+            );
+            background-size: 200% 200%;
+            animation: auroraWave2 12s ease-in-out infinite;
+            filter: blur(50px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        @keyframes auroraWave {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 0% 50%;
+            }
+            50% {
+                transform: translateX(-10%) translateY(10%) rotate(5deg) scale(1.1) skew(5deg, -5deg);
+                background-position: 100% 50%;
+            }
+            100% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes auroraWave2 {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 100% 50%;
+            }
+            50% {
+                transform: translateX(15%) translateY(-10%) rotate(-5deg) scale(1.2) skew(-8deg, 4deg);
+                background-position: 0% 50%;
+            }
+            100% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1) skew(0deg);
+                background-position: 100% 50%;
+            }
+        }
+
+        /* 星星動畫 */
+        .stars {
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgb(255, 255, 255);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0.8;
+            animation: twinkle 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+        }
+
+        /* 按鈕 */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora"></div>
+    <div class="aurora2"></div>
+    <div class="stars"></div>
+
+    <div class="container">
+        <h1>~一段創始人的小故事~</h1>
+        <p>餐廳創始人，王柏允，一位對料理懷抱熱情、對生活充滿美感的美食家，至今仍在不停追求美味的巔峰。</p>
+        <p>他，從小就對烹飪產生濃厚的興趣，在課業之外的閒暇時間常常看著網路食譜做簡單的料理。隨著下廚的經驗累積，也漸漸擁有了自己的一套菜單秘方，其滋味獲得家人的讚賞，就在這一霎那，他找到了自己的人生目標──就是開一家屬於自己的餐廳。</p>    
+        <p>為了這個夢想，國高中時便厚著臉皮地向住家附近的餐廳大廚請教料理祕訣，大學時更是不畏語言的隔閡以及地理上的障礙，遠赴歐洲交換留學，為的就是能夠親自體驗、品嘗、學習道地的味道及手藝。</p>
+        <p>然而深造的過程並非順風順水。回憶在第一間餐廳打工時，完全無法掌握正統的西式料理烹調方式，因此很快就被辭退了。但他沒有灰心，繼續尋找下一間餐廳工作，第二間、第三間、第四間……，不知道被辭退多少次，他始終沒辦法掌握要領，甚至曾經被轉到洗碗盤的崗位，因此經常抱著艾菲爾鐵塔痛哭、對著沉思者雕像吐苦水亦或是對著蒙娜麗莎傻笑。</p>
+        <p>儘管沮喪，他依舊沒有放棄認真學習，在洗盤子時他還會跑去廚房偷喵廚師們的料理過程，還會觀察端出去的菜色帶給客人們的表情，筆記本一本接著一本詳細記錄了所見所聞。雖然歷經了重重困難，憑藉著他不屈不撓的決心以及用心觀察，終於釐清了道地西式料理手法跟在台西式料理微妙差異。</p>
+        <p>從這趟收穫滿滿的留歐之旅，將對歐洲經典風味的深刻理解，融合現代料理技巧帶回台灣，結合氣派、古典的餐廳氛圍，並堅持選用當季食材、注重每一道菜的靈魂與細節，希望讓每位客人都能在這裡，品嚐到一份來自歐洲的溫度與記憶。</p>
+        <p>"真正打動人心的料理，不只是味道，更是一段故事"—— 王柏允</p>
+        <a href="http://127.0.0.1:5500/%E7%B6%B2%E9%A0%81%E4%BD%9C%E6%A5%AD/77.html">
+            <button>To be Continued</button>
+        </a>
+    </div>
+
+    <script>
+        // 星星動畫
+        const starContainer = document.querySelector('.stars');
+        function createStar() {
+            let star = document.createElement('div');
+            star.classList.add('star');
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starContainer.appendChild(star);
+            
+            setTimeout(() => {
+                star.remove();
+                createStar();
+            }, Math.random() * 5000 + 3000);
+        }
+        for (let i = 0; i < 50; i++) {
+            createStar();
+        }
+    </script>
+</body>
+</html>
