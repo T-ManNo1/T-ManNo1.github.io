@@ -29,17 +29,19 @@
 
         /* 容器 */
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 1500px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border-radius: 10px;
-            margin: 0 20px; /* 移除上下空白，只保留左右 */
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10000vw;  /* 設為視窗寬度的100% */
+    height: 10000vh; /* 設為視窗高度的100% */
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    margin: 0 20px;
+    max-width: none; /* 移除最大寬度限制 */
+}
+
 
         /* 標題與段落樣式 */
         h1 {
