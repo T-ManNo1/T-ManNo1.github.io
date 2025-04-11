@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>訂單結果</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Georgia", serif;
+      background-color: #ff914d; /* 橘色底 */
+      color: #333;
+    }
+
+    .overlay {
+      min-height: 100vh;
+      padding: 40px;
+      background: linear-gradient(to bottom right, #ff914d, #ffcba4); /* 漸層橘增添質感 */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: #4b2e2e;
+      position: relative;
+    }
+
+    h1::before, h1::after {
+      content: "🍁";
+      font-size: 24px;
+      margin: 0 10px;
+      color: #7a4e4e;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff3e0; /* 淡橘黃色底 */
+      color: #5d4037;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ffcc80;
+    }
+
+    th {
+      background-color: #ffe0b2;
+      font-weight: bold;
+    }
+
+    .total {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 24px;
+      color: #4b2e2e;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Order Slip</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Code</th>
+          <th>Dish</th>
+          <th>Price (€)</th>
+        </tr>
+      </thead>
+      <tbody id="result-body"></tbody>
+    </table>
+
+    <div class="total" id="total-price"></div>
+  </div>
+
+  <script>
+    const dishNames = {
+      "Appetizer": {
+        A: { name: "Truffle Butter Baguette", price: 18 },
+        B: { name: "Moules Frites", price: 17 },
+        C: { name: "Brussel Sprouts", price: 14 },
+        D: { name: "Moules Vin Blanc", price: 18 },
+        E: { name: "Mozzarella and Tomatos", price: 15 },
+        F: { name: "Bruschetta", price: 13 }
+      },
+      "Salad": {
+        A: { name: "Smokeed Chicken Chopped Salad", price: 16 },
+        B: { name: "Warmed German Potato Salad", price: 14 },
+        C: { name: "Salad with Honey Mustard Sauce", price: 13 },
+        D: { name: "Watermelon Salad with Whipped Feta", price: 15 },
+        E: { name: "French Sautéed Mixed Vegetables", price: 12 },
+        F: { name: "Taiwanese kimchi", price: 13 }
+      },
+      "Soup": {
+        A: { name: "Authentic Borscht Soup", price: 14 },
+        B: { name: "Roasted Pumpkin Soup with Bacon", price: 15 },
+        C: { name: "French Onion Soup", price: 13 },
+        D: { name: "Bounce Turtle Soup", price: 18 },
+        E: { name: "Bouillabaisse", price: 17 },
+        F: { name: "Ajoblanco", price: 12 }
+      },
+      "Nonstaple Food": {
+        A: { name: "Crispy Fried Fish with Tartar Sauce", price: 24 },
+        B: { name: "Greenland Halibut with Lemon Butter", price: 26 },
+        C: { name: "surströmming", price: 25 },
+        D: { name: "Calamares Ala Andaluza", price: 23 },
+        E: { name: "Ploughmans lunch", price: 20 },
+        F: { name: "Gambas Al Ajillo", price: 22 }
+      },
+      "Staple Food": {
+        A: { name: "Herbes de Provence Roasted Chicken", price: 24 },
+        B: { name: "Hungarian Beef Goulash", price: 26 },
+        C: { name: "Spaghetti Alla Puttanesca", price: 22 },
+        D: { name: "Paella", price: 27 },
+        E: { name: "Schweinshaxe", price: 28 },
+        F: { name: "Intestine vermicelli", price: 21 }
+      },
+      "Dessert": {
+        A: { name: "Fig Custard Tart", price: 12 },
+        B: { name: "Vanillekipferl", price: 10 },
+        C: { name: "Marble Cheese Cake", price: 11 },
+        D: { name: "Strawberry Ice Cream", price: 9 },
+        E: { name: "Crème brûlée", price: 13 },
+        F: { name: "Classical Brownie", price: 10 }
+      },
+      "Beverage": {
+        A: { name: "The Flavor of Heartache", price: 13 },
+        B: { name: "Bourbon Whiskey", price: 14 },
+        C: { name: "Vodka+Whiskey", price: 13 },
+        D: { name: "Wiener Kaffee", price: 10 },
+        E: { name: "Crodo Lemon Soda Mojito", price: 11 },
+        F: { name: "Fruit Tea", price: 9 }
+      }
+    };
+
+    const categories = ["Appetizer", "Salad", "Soup", "Nonstaple Food", "Staple Food", "Dessert", "Beverage"];
+    let total = 0;
+
+    const tbody = document.getElementById("result-body");
+
+    categories.forEach(category => {
+      const code = new URLSearchParams(window.location.search).get(category);
+      const dish = dishNames[category][code];
+
+      if (dish) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${category}</td>
+          <td>${code}</td>
+          <td>${dish.name}</td>
+          <td>€${dish.price}</td>
+        `;
+        tbody.appendChild(row);
+        total += dish.price;
+      }
+    });
+
+    document.getElementById("total-price").textContent = `Total：€${total}`;
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
