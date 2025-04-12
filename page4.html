@@ -14,23 +14,23 @@
 
     .overlay {
       min-height: 100vh;
-      padding: 2.5rem; /* 40px */
+      padding: 2.5rem;
       background: linear-gradient(to bottom right, #ff914d, #ffcba4);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 2.5rem; /* 40px */
-      font-size: 2.25rem; /* 36px */
-      letter-spacing: 0.125rem; /* 2px */
+      margin-bottom: 2.5rem;
+      font-size: 2.25rem;
+      letter-spacing: 0.125rem;
       color: #4b2e2e;
       position: relative;
     }
 
     h1::before, h1::after {
       content: "🍁";
-      font-size: 1.5rem; /* 24px */
-      margin: 0 0.625rem; /* 10px */
+      font-size: 1.5rem;
+      margin: 0 0.625rem;
       color: #7a4e4e;
     }
 
@@ -40,15 +40,15 @@
       border-collapse: collapse;
       background-color: #fff3e0;
       color: #5d4037;
-      border-radius: 0.625rem; /* 10px */
+      border-radius: 0.625rem;
       overflow: hidden;
-      box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3); /* 4px 12px */
+      box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3);
     }
 
     th, td {
-      padding: 0.9375rem; /* 15px */
+      padding: 0.9375rem;
       text-align: center;
-      border-bottom: 0.0625rem solid #ffcc80; /* 1px */
+      border-bottom: 0.0625rem solid #ffcc80;
     }
 
     th {
@@ -57,11 +57,95 @@
     }
 
     .total {
-      margin-top: 1.875rem; /* 30px */
+      margin-top: 1.875rem;
       text-align: center;
-      font-size: 1.5rem; /* 24px */
+      font-size: 1.5rem;
       color: #4b2e2e;
       font-weight: bold;
+    }
+
+    .member-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .member-section input {
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    .member-section button {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      background-color: #4b2e2e;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    .member-section button:hover {
+      background-color: #7a4e4e;
+    }
+
+    #member-message {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+
+    #join-form {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .vip-message {
+      padding: 1.5rem;
+      border-radius: 1.25rem;
+      background: radial-gradient(circle at center, #ffffff 0%, #ffffff 100%);
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 0 20px #fff700, 0 0 40px #ff9900, 0 0 60px #ffffff;
+      border: 3px solid gold;
+      max-width: 650px;
+      margin: 2rem auto;
+      position: relative;
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+
+    .vip-title {
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .vip-host {
+      color: #ffb6c1;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .vip-text {
+      background-color: white;
+      color: black;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px #fff700, 0 0 40px #ff9900, 0 0 60px #ffffff;
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 25px #ffd700, 0 0 50px #ffcc00, 0 0 70px #ffffff;
+        transform: scale(1.02);
+      }
     }
   </style>
 </head>
@@ -82,6 +166,21 @@
     </table>
 
     <div class="total" id="total-price"></div>
+
+    <div class="member-section">
+      <h2>Membership Confirm</h2>
+      <input type="text" id="member-name" placeholder="會員名稱">
+      <input type="text" id="member-id" placeholder="會員編號">
+      <button onclick="checkMember()">Check Member</button>
+
+      <div id="member-message"></div>
+
+      <div id="join-form">
+        <input type="text" id="new-name" placeholder="Name">
+        <input type="text" id="new-phone" placeholder="Phone Number">
+        <button onclick="submitJoin()">Submit and Become Our Membership</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -167,10 +266,63 @@
     });
 
     document.getElementById("total-price").textContent = `Total：€${total}`;
+
+    function checkMember() {
+      const name = document.getElementById("member-name").value.trim();
+      const id = document.getElementById("member-id").value.trim();
+      const messageDiv = document.getElementById("member-message");
+      const joinForm = document.getElementById("join-form");
+      const totalPriceDisplay = document.getElementById("total-price");
+
+      if (name === "許廷安" && id === "123456") {
+        const discounted = total * 0.5;
+        messageDiv.innerHTML = `
+          <div class="vip-message">
+  <div class="vip-title">
+    👑 許大人，感謝您的大駕光臨，您是我們餐廳的 <strong>超級黑鑽會員</strong>，
+    享有 <strong>餐點五折優惠</strong> 以及 <strong>贈送高級白蘭地一瓶</strong>!!<br>
+    並且我 <span class="vip-host">王柏允</span> 真心期待您的再次光臨!!!!! ✨
+  </div>
+</div>
+`;
+        totalPriceDisplay.textContent = `Total for Your Black-Dimand Membership：€${discounted.toFixed(2)}`;
+        joinForm.style.display = "none";
+      } else {
+        messageDiv.innerHTML = `您還不是本店的會員，加入成為普通會員將享99折優惠，請問想要加入普通會員嗎?`;
+        messageDiv.style.color = "#8e44ad";
+        totalPriceDisplay.textContent = `Total：€${total}`;
+        joinForm.style.display = "block";
+      }
+    }
+
+    function submitJoin() {
+      const newName = document.getElementById("new-name").value.trim();
+      const newPhone = document.getElementById("new-phone").value.trim();
+      const messageDiv = document.getElementById("member-message");
+
+      if (newName && newPhone) {
+        messageDiv.innerHTML = `感謝 ${newName} 加入會員！我們已記下您的聯絡電話：${newPhone}，享有 99 折優惠！<br>來店消費金額超過一定額度將依序升級成：<br><br>
+          <div style="background:#fff;padding:0.75rem;border-radius:0.75rem;display:inline-block;">
+    <div style="color:blue;font-weight:bold;">・尊爵會員</div>
+    <div style="color:gold;font-weight:bold;">・黃金會員</div>
+    <div style="color:platinum;font-weight:bold;">・白金會員</div>
+    <div style="color:violet;font-weight:bold;">・鑽石會員</div>
+    <div style="color:black;font-weight:bold;animation: glowPulse 2s infinite;">・黑鑽會員（最高榮譽）</div>
+  </div>
+  <br><br>
+  <div style="font-size: 1.1rem; color: #27ae60; font-weight: bold;">請努力往上爬吧! 挑戰者們!!</div>`;
+        document.getElementById("join-form").style.display = "none";
+        const discounted = total * 0.99;
+        document.getElementById("total-price").textContent = `Total for Your Ordinary Membership：€${discounted.toFixed(2)}`;
+        messageDiv.style.color = "#27ae60";
+      } else {
+        messageDiv.innerHTML = `請填寫完整資料。`;
+        messageDiv.style.color = "#e74c3c";
+      }
+    }
   </script>
 </body>
 </html>
-
 
 
 
