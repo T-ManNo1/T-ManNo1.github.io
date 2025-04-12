@@ -8,29 +8,29 @@
       margin: 0;
       padding: 0;
       font-family: "Georgia", serif;
-      background-color: #ff914d; /* 橘色底 */
+      background-color: #ff914d;
       color: #333;
     }
 
     .overlay {
       min-height: 100vh;
-      padding: 40px;
-      background: linear-gradient(to bottom right, #ff914d, #ffcba4); /* 漸層橘增添質感 */
+      padding: 2.5rem; /* 40px */
+      background: linear-gradient(to bottom right, #ff914d, #ffcba4);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 36px;
-      letter-spacing: 2px;
+      margin-bottom: 2.5rem; /* 40px */
+      font-size: 2.25rem; /* 36px */
+      letter-spacing: 0.125rem; /* 2px */
       color: #4b2e2e;
       position: relative;
     }
 
     h1::before, h1::after {
       content: "🍁";
-      font-size: 24px;
-      margin: 0 10px;
+      font-size: 1.5rem; /* 24px */
+      margin: 0 0.625rem; /* 10px */
       color: #7a4e4e;
     }
 
@@ -38,17 +38,17 @@
       width: 90%;
       margin: 0 auto;
       border-collapse: collapse;
-      background-color: #fff3e0; /* 淡橘黃色底 */
+      background-color: #fff3e0;
       color: #5d4037;
-      border-radius: 10px;
+      border-radius: 0.625rem; /* 10px */
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.3); /* 4px 12px */
     }
 
     th, td {
-      padding: 15px;
+      padding: 0.9375rem; /* 15px */
       text-align: center;
-      border-bottom: 1px solid #ffcc80;
+      border-bottom: 0.0625rem solid #ffcc80; /* 1px */
     }
 
     th {
@@ -57,9 +57,9 @@
     }
 
     .total {
-      margin-top: 30px;
+      margin-top: 1.875rem; /* 30px */
       text-align: center;
-      font-size: 24px;
+      font-size: 1.5rem; /* 24px */
       color: #4b2e2e;
       font-weight: bold;
     }
@@ -67,7 +67,7 @@
 </head>
 <body>
   <div class="overlay">
-    <h1>Order Check</h1>
+    <h1>Order Slip</h1>
 
     <table>
       <thead>
@@ -135,7 +135,7 @@
         F: { name: "Classical Brownie", price: 10 }
       },
       "Beverage": {
-        A: { name: "The Flavor of Heartache", price: 50 },
+        A: { name: "The Flavor of Heartache", price: 13 },
         B: { name: "Bourbon Whiskey", price: 14 },
         C: { name: "Vodka+Whiskey", price: 13 },
         D: { name: "Wiener Kaffee", price: 10 },
