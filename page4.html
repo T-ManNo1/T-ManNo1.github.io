@@ -296,30 +296,35 @@
     }
 
     function submitJoin() {
-      const newName = document.getElementById("new-name").value.trim();
-      const newPhone = document.getElementById("new-phone").value.trim();
-      const messageDiv = document.getElementById("member-message");
+  const newName = document.getElementById("new-name").value.trim();
+  const newPhone = document.getElementById("new-phone").value.trim();
+  const messageDiv = document.getElementById("member-message");
 
-      if (newName && newPhone) {
-        messageDiv.innerHTML = `感謝 ${newName} 加入會員！我們已記下您的聯絡電話：${newPhone}，享有 99 折優惠！<br>來店消費金額超過一定額度或是對本店有特殊貢獻將依序升級成：<br><br>
-          <div style="background:#fff;padding:0.75rem;border-radius:0.75rem;display:inline-block;">
-    <div style="color:blue;font-weight:bold;">・尊爵會員</div>
-    <div style="color:gold;font-weight:bold;">・黃金會員</div>
-    <div style="color:platinum;font-weight:bold;">・白金會員</div>
-    <div style="color:violet;font-weight:bold;">・鑽石會員</div>
-    <div style="color:black;font-weight:bold;animation: glowPulse 2s infinite;">・黑鑽會員（最高榮譽）</div>
-  </div>
-  <br><br>
-  <div style="font-size: 1.1rem; color: #27ae60; font-weight: bold;">請努力往上爬吧! 挑戰者們!!</div>`;
-        document.getElementById("join-form").style.display = "none";
-        const discounted = total * 0.99;
-        document.getElementById("total-price").textContent = `Total for Your Ordinary Membership：€${discounted.toFixed(2)}`;
-        messageDiv.style.color = "#27ae60";
-      } else {
-        messageDiv.innerHTML = `請填寫完整資料。`;
-        messageDiv.style.color = "#e74c3c";
-      }
-    }
+  if (newName && newPhone) {
+    messageDiv.innerHTML = `
+      <div style="color: black;">
+        感謝 ${newName} 加入會員！我們已記下您的聯絡電話：${newPhone}，享有 99 折優惠！<br>來店消費金額超過一定額度或是對本店有特殊貢獻將依序升級成：<br><br>
+        <div style="background:#fff;padding:0.75rem;border-radius:0.75rem;display:inline-block;">
+          <div style="color:blue;font-weight:bold;">・尊爵會員</div>
+          <div style="color:gold;font-weight:bold;">・黃金會員</div>
+          <div style="color:platinum;font-weight:bold;">・白金會員</div>
+          <div style="color:violet;font-weight:bold;">・鑽石會員</div>
+          <div style="color:black;font-weight:bold;animation: glowPulse 2s infinite;">・黑鑽會員（最高榮譽）</div>
+        </div>
+        <br><br>
+        <div style="font-size: 1.1rem; color: black; font-weight: bold;">請努力往上爬吧! 挑戰者們!!</div>
+      </div>
+    `;
+    document.getElementById("join-form").style.display = "none";
+    const discounted = total * 0.99;
+    document.getElementById("total-price").textContent = `Total for Your Ordinary Membership：€${discounted.toFixed(2)}`;
+    messageDiv.style.color = "black";
+  } else {
+    messageDiv.innerHTML = `請填寫完整資料。`;
+    messageDiv.style.color = "#e74c3c";
+  }
+}
+
   </script>
 </body>
 </html>
