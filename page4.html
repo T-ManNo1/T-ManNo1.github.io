@@ -110,7 +110,7 @@
       text-align: center;
       box-shadow: 0 0 20px #fff700, 0 0 40px #ff9900, 0 0 60px #ffffff;
       border: 3px solid gold;
-      max-width: 650px;
+      max-width: 40.625rem;
       margin: 2rem auto;
       position: relative;
       animation: glowPulse 2s ease-in-out infinite;
@@ -279,8 +279,8 @@
         messageDiv.innerHTML = `
           <div class="vip-message">
   <div class="vip-title">
-    👑 許大人，感謝您的大駕光臨，您是我們餐廳的 <strong>超級黑鑽會員</strong>，
-    享有 <strong>餐點五折優惠</strong> 以及 <strong>贈送高級白蘭地一瓶</strong>!!<br>
+    👑 許大人，感謝您的大駕光臨，您作為本餐廳的 <strong>超級黑鑽會員</strong>，
+    享有 <strong>餐點五折優惠</strong> 以及 <strong>贈送「王者之液」– 限定黑鑽款白蘭地 </strong><br>一瓶，作為小小的誠意!!<br>
     並且我 <span class="vip-host">王柏允</span> 真心期待您的再次光臨!!!!! ✨
   </div>
 </div>
@@ -301,7 +301,7 @@
       const messageDiv = document.getElementById("member-message");
 
       if (newName && newPhone) {
-        messageDiv.innerHTML = `感謝 ${newName} 加入會員！我們已記下您的聯絡電話：${newPhone}，享有 99 折優惠！<br>來店消費金額超過一定額度將依序升級成：<br><br>
+        messageDiv.innerHTML = `感謝 ${newName} 加入會員！我們已記下您的聯絡電話：${newPhone}，享有 99 折優惠！<br>來店消費金額超過一定額度或是對本店有特殊貢獻將依序升級成：<br><br>
           <div style="background:#fff;padding:0.75rem;border-radius:0.75rem;display:inline-block;">
     <div style="color:blue;font-weight:bold;">・尊爵會員</div>
     <div style="color:gold;font-weight:bold;">・黃金會員</div>
