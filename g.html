@@ -1,65 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>前情提要</title>
     <style>
-        /* Reset 與全域設定 */
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        html, body {
-            height: 165%; /* 記得段落被砍掉就把這裡調高 */
-            overflow-y: auto; /* 允許頁面垂直滾動 */
+
+        html {
+            font-size: 16px;
         }
+
         body {
-            margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
+            align-items: center;
             background: radial-gradient(circle at bottom, #1a003d, #13013c);
             overflow-x: hidden;
             position: relative;
-            flex-direction: column;
-            align-items: center;
+            padding: 0;
+            margin: 0;
         }
 
-        /* 容器 */
         .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            max-width: 1500px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border-radius: 10px;
-            margin: 0 20px; /* 移除上下空白，只保留左右 */
-            /* 移除邊框 */
-            border: none;
+            justify-content: center;
         }
 
-        /* 標題與段落樣式 */
+
         h1 {
             color: #fff;
-            font-size: 48px;
-            margin-bottom: 40px;
-        }
-        p {
-            color: #fff;
-            font-size: 24px;
-            line-height: 1.8;
+            font-size: 2.9rem;
+            margin-bottom: 2rem;
             text-align: center;
-            max-width: 700px;
-            margin-bottom: 20px;
         }
 
-        /* 極光背景 */
+        p {
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 730px;
+            margin-bottom: 1.5rem;
+            padding: 0 10px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.23rem;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+
         .aurora,
         .aurora2,
         .stars {
@@ -68,7 +81,8 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .aurora {
@@ -83,7 +97,6 @@
             animation: auroraWave 8s ease-in-out infinite;
             filter: blur(40px);
             mix-blend-mode: screen;
-            pointer-events: none;
         }
 
         .aurora2 {
@@ -99,7 +112,6 @@
             animation: auroraWave2 12s ease-in-out infinite;
             filter: blur(50px);
             mix-blend-mode: screen;
-            pointer-events: none;
         }
 
         @keyframes auroraWave {
@@ -132,7 +144,6 @@
             }
         }
 
-        /* 星星動畫 */
         .stars {
             overflow: hidden;
         }
@@ -144,6 +155,7 @@
             background: rgb(255, 255, 255);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             opacity: 0.8;
+            filter: drop-shadow(0 0 16px white); /* 提高亮度的效果 */
             animation: twinkle 2s infinite alternate ease-in-out;
         }
 
@@ -152,16 +164,13 @@
             100% { opacity: 1; transform: scale(1.2) rotate(15deg); }
         }
 
-        /* 按鈕 */
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #000000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 30px;
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -179,13 +188,13 @@
         <p>儘管沮喪，他依舊沒有放棄認真學習，在洗盤子時他還會跑去廚房偷喵廚師們的料理過程，還會觀察端出去的菜色帶給客人們的表情，筆記本一本接著一本詳細記錄了所見所聞。雖然歷經了重重困難，憑藉著他不屈不撓的決心以及用心觀察，終於釐清了道地西式料理手法跟在台西式料理微妙差異。</p>
         <p>從這趟收穫滿滿的留歐之旅，將對歐洲經典風味的深刻理解，融合現代料理技巧帶回台灣，結合氣派、古典的餐廳氛圍，並堅持選用當季食材、注重每一道菜的靈魂與細節，希望讓每位客人都能在這裡，品嚐到一份來自歐洲的溫度與記憶。</p>
         <p>"真正打動人心的料理，不只是味道，更是一段故事"—— 王柏允</p>
-        <a href="http://127.0.0.1:5500/%E7%B6%B2%E9%A0%81%E4%BD%9C%E6%A5%AD/77.html">
-            <button>To be Continued</button>
+
+        <a href="page2.html">
+            <button>To Be Continued</button>
         </a>
     </div>
 
     <script>
-        // 星星動畫
         const starContainer = document.querySelector('.stars');
         function createStar() {
             let star = document.createElement('div');
@@ -194,12 +203,13 @@
             star.style.left = Math.random() * 100 + '%';
             star.style.animationDelay = Math.random() * 2 + 's';
             starContainer.appendChild(star);
-            
+
             setTimeout(() => {
                 star.remove();
                 createStar();
             }, Math.random() * 5000 + 3000);
         }
+
         for (let i = 0; i < 50; i++) {
             createStar();
         }
